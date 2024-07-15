@@ -1,5 +1,39 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Usuario
+
 @{
+    ViewData["Title"] = "Registrarse";
+}
+
+<h2>Ingresa los datos.</h2>
+
+<form method="post" asp-controller="Home" asp-action="SubmitForm" enctype="multipart/form-data">
+    <div>
+        <label>Nombre</label>
+        <input type="text" asp-for="Nombre" required />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Correo</label>
+        <input type="email" asp-for="Correo" required />
+        <span asp-validation-for="Correo" class="text-danger"></span>
+    </div>
+    <div>
+        <label>Contraseña</label>
+        <input type="password" asp-for="Contraseña" required />
+        <span asp-validation-for="Contraseña" class="text-danger"></span>
+    </div>
+    <button type="submit">Registrarse</button>
+</form>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div>
+        <span>@ViewBag.ErrorMessage</span>
+    </div>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
