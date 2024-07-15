@@ -13,7 +13,7 @@ public partial class ListasDeReproduccion
 
     public DateTime? FechaCreacion { get; set; }
 
-    public virtual ICollection<Cancione> Canciones { get; set; } = new List<Cancione>();
+    public virtual ICollection<Cancion> Cancions { get; set; } = new List<Cancion>();
 
     public virtual Usuario Usuario { get; set; } = null!;
 }

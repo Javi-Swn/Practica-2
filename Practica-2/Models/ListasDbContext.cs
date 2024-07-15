@@ -15,7 +15,7 @@ public partial class ListasDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Cancione> Canciones { get; set; }
+    public virtual DbSet<Cancion> Cancions { get; set; }
 
     public virtual DbSet<ListasDeReproduccion> ListasDeReproduccions { get; set; }
 
@@ -27,9 +27,11 @@ public partial class ListasDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Cancione>(entity =>
+        modelBuilder.Entity<Cancion>(entity =>
         {
-            entity.HasKey(e => e.CancionId).HasName("PK__Cancione__EDA6B1AF5A26FD65");
+            entity.HasKey(e => e.CancionId).HasName("PK__Cancion__EDA6B1AF01340006");
+
+            entity.ToTable("Cancion");
 
             entity.Property(e => e.CancionId).HasColumnName("CancionID");
             entity.Property(e => e.Album).HasMaxLength(100);
@@ -40,15 +42,14 @@ public partial class ListasDbContext : DbContext
             entity.Property(e => e.ListaId).HasColumnName("ListaID");
             entity.Property(e => e.Titulo).HasMaxLength(100);
 
-            entity.HasOne(d => d.Lista).WithMany(p => p.Canciones)
+            entity.HasOne(d => d.Lista).WithMany(p => p.Cancions)
                 .HasForeignKey(d => d.ListaId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Canciones__Lista__403A8C7D");
+                .HasConstraintName("FK__Cancion__ListaID__403A8C7D");
         });
 
         modelBuilder.Entity<ListasDeReproduccion>(entity =>
         {
-            entity.HasKey(e => e.ListaId).HasName("PK__ListasDe__2B0A743FCFC85AC1");
+            entity.HasKey(e => e.ListaId).HasName("PK__ListasDe__2B0A743F2DA3310D");
 
             entity.ToTable("ListasDeReproduccion");
 
@@ -67,9 +68,9 @@ public partial class ListasDbContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.UsuarioId).HasName("PK__Usuarios__2B3DE798D07F39D9");
+            entity.HasKey(e => e.UsuarioId).HasName("PK__Usuarios__2B3DE798836FF18A");
 
-            entity.HasIndex(e => e.Correo, "UQ__Usuarios__60695A1981BF9F72").IsUnique();
+            entity.HasIndex(e => e.Correo, "UQ__Usuarios__60695A19206A1D62").IsUnique();
 
             entity.Property(e => e.UsuarioId).HasColumnName("UsuarioID");
             entity.Property(e => e.Contraseña).HasMaxLength(100);
