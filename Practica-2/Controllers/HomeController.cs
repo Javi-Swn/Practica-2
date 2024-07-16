@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Practica_2.Models;
 using System.Diagnostics;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Practica_2.Controllers
 {
@@ -39,6 +40,7 @@ namespace Practica_2.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Dash()
         {
             return View();
