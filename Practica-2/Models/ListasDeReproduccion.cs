@@ -15,5 +15,5 @@ public partial class ListasDeReproduccion
 
     public virtual ICollection<Cancion> Cancions { get; set; } = new List<Cancion>();
 
-    public virtual Usuario Usuario { get; set; } = null!;
+    public virtual Usuario? Usuario { get; set; } = null!;
 }

@@ -43,7 +43,18 @@ namespace Practica_2.Controllers
         [Authorize]
         public IActionResult Dash()
         {
-            return View();
+            var userIdClaim = User.FindFirst("UserId");
+            if (userIdClaim == null)
+            {
+                return Unauthorized();
+            }
+            var usuarioId = int.Parse(userIdClaim.Value);
+
+            var listas = _context.ListasDeReproduccions
+                                .Where(l => l.UsuarioId == usuarioId)
+                                .ToList();
+
+            return View(listas);
         }
 
         [HttpPost]
@@ -69,7 +80,9 @@ namespace Practica_2.Controllers
             {
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, user.Nombre)
+                    new Claim(ClaimTypes.Name, user.Nombre),
+                    new Claim(ClaimTypes.Email, user.Correo),
+                    new Claim("UserId", user.UsuarioId.ToString())
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

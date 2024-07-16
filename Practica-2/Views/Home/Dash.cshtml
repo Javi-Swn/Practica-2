@@ -1,10 +1,46 @@
-﻿@{
+﻿@model IEnumerable<Practica_2.Models.ListasDeReproduccion>
+
+@{
     Layout = "_LayoutDash";
     ViewData["Title"] = "Inicio";
-
 }
 
 <div class="dashboard-container">
     <h1 class="display-4 text-center">Bienvenido al Dashboard</h1>
-    <p class="text-center">Playlist etc.</p>
+    <p class="text-center">Tus listas de reproducción:</p>
+
+
+    @if (Model != null && Model.Any())
+    {
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Fecha de Creación</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lista in Model)
+            {
+                <tr>
+                    <td>@lista.Nombre</td>
+                    <td>@lista.FechaCreacion</td>
+                    <td>
+                        <a asp-action="View" asp-route-id="@lista.ListaId">Ver</a> |
+                        <a asp-controller="ListasDeReproduccion"  asp-action="Edit" asp-route-id="@lista.ListaId">Editar</a> |
+                        <a asp-controller="ListasDeReproduccion" asp-action="Delete" asp-route-id="@lista.ListaId">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
+    else
+    {
+        <p>No tienes ninguna lista de reproducción.</p>
+    }
+    <div class="text-center">
+        <a asp-controller="ListasDeReproduccion" asp-action="Create" class="btn btn-primary">Crear Nueva Lista de Reproducción</a>
+    </div>
 </div>
