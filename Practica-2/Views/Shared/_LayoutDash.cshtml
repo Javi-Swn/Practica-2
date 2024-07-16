@@ -19,18 +19,21 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        @if (User.Identity.IsAuthenticated)
-                        {
+                        <!-- Left-aligned navigation items -->
+                    </ul>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
                                 <a class="nav-link text-dark">@User.Identity.Name</a>
                             </li>
                             <li class="nav-item">
                                 <form method="post" asp-controller="Home" asp-action="Logout">
-                                    <button type="submit" class="btn btn-link nav-link">Logout</button>
+                                    <button type="submit" class="btn btn-danger">Logout</button>
                                 </form>
                             </li>
-                        }
-                    </ul>
+                        </ul>
+                    }
                 </div>
             </div>
         </nav>

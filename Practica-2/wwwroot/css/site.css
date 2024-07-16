@@ -2,7 +2,7 @@
 
 /* General styles */
 body {
-    background-color: #f8f9fa;
+    background-color: #c3f1f7;
     color: #343a40;
 }
 
@@ -29,7 +29,7 @@ body {
 
 /* Footer styles */
 footer {
-    background-color: #ffffff;
+    background-color: #ffd6f2;
     padding: 10px 0;
     border-top: 2px solid #dddddd;
     margin-top: 20px;
@@ -87,3 +87,8 @@ footer {
         font-size: 1.25rem;
         color: #6c757d;
     }
+
+/* Align right */
+.ml-auto {
+    margin-left: auto !important;
+}
