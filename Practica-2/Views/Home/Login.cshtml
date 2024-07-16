@@ -1,24 +1,26 @@
 ﻿@{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Iniciar Sesión";
 }
 
-<h2>Login</h2>
+<div class="form-container">
 
-<form method="post" asp-controller="Home" asp-action="Login">
-    <div>
-        <label>Correo</label>
-        <input type="text" name="Correo" required />
-    </div>
-    <div>
-        <label>Contraseña</label>
-        <input type="password" name="password" required />
-    </div>
-    <button type="submit">Login</button>
-</form>
+    <h2>Login</h2>
 
-@if (ViewBag.ErrorMessage != null)
-{
-    <div>
-        <span>@ViewBag.ErrorMessage</span>
-    </div>
-}
+    <form method="post" asp-controller="Home" asp-action="Login">
+        <div class="form-group">
+            <label for="Correo">Correo</label>
+            <input type="text" id="Correo" name="Correo" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" class="form-control" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+    </form>
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger mt-3">
+            <span>@ViewBag.ErrorMessage</span>
+        </div>
+    }
+</div>

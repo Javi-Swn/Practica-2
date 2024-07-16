@@ -1,22 +1,89 @@
-html {
-  font-size: 14px;
-}
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+/* General styles */
 body {
-  margin-bottom: 60px;
+    background-color: #f8f9fa;
+    color: #343a40;
 }
+
+/* Navbar styles */
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 2px solid #dddddd;
+}
+
+    .navbar .navbar-brand {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .navbar .nav-link {
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+/* Main container */
+.container {
+    padding-top: 20px;
+}
+
+/* Footer styles */
+footer {
+    background-color: #ffffff;
+    padding: 10px 0;
+    border-top: 2px solid #dddddd;
+    margin-top: 20px;
+}
+
+/* Custom button styles */
+.btn-link.nav-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+    .btn-link.nav-link:hover, .btn-link.nav-link:focus {
+        color: #0056b3;
+        text-decoration: underline;
+    }
+
+/* Form container */
+.form-container {
+    background-color: #ffffff;
+    padding: 30px;
+    margin: 50px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+}
+
+/* Form group styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Form button styles */
+.form-container .btn {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* Alert styles */
+.alert {
+    border-radius: 5px;
+}
+
+/* Dashboard styles */
+.dashboard-container {
+    padding: 50px;
+    text-align: center;
+}
+
+    .dashboard-container h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    .dashboard-container p {
+        font-size: 1.25rem;
+        color: #6c757d;
+    }

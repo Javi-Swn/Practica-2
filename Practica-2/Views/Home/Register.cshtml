@@ -4,26 +4,33 @@
     ViewData["Title"] = "Registrarse";
 }
 
-<h2>Ingresa los datos.</h2>
-
-<form method="post" asp-controller="Home" asp-action="SubmitForm" enctype="multipart/form-data">
-    <div>
-        <label>Nombre</label>
-        <input type="text" asp-for="Nombre" required />
-        <span asp-validation-for="Nombre" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Correo</label>
-        <input type="email" asp-for="Correo" required />
-        <span asp-validation-for="Correo" class="text-danger"></span>
-    </div>
-    <div>
-        <label>Contraseña</label>
-        <input type="password" asp-for="Contraseña" required />
-        <span asp-validation-for="Contraseña" class="text-danger"></span>
-    </div>
-    <button type="submit">Registrarse</button>
-</form>
+<div class="form-container">
+    <h2>Registrarse</h2>
+    <form method="post" asp-controller="Home" asp-action="SubmitForm" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="Nombre">Nombre</label>
+            <input type="text" id="Nombre" asp-for="Nombre" class="form-control" required />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="Correo">Correo</label>
+            <input type="email" id="Correo" asp-for="Correo" class="form-control" required />
+            <span asp-validation-for="Correo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="Contraseña">Contraseña</label>
+            <input type="password" id="Contraseña" asp-for="Contraseña" class="form-control" required />
+            <span asp-validation-for="Contraseña" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
+    </form>
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger mt-3">
+            <span>@ViewBag.ErrorMessage</span>
+        </div>
+    }
+</div>
 
 @if (ViewBag.ErrorMessage != null)
 {
