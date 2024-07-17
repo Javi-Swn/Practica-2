@@ -15,7 +15,7 @@ public partial class Cancion
 
     public string? Album { get; set; }
 
-    public TimeOnly? Duracion { get; set; }
+    public TimeSpan? Duracion { get; set; }
 
     public string? Enlace { get; set; }
 

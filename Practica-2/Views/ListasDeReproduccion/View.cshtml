@@ -1,0 +1,76 @@
+﻿@model Practica_2.Models.ListasDeReproduccion
+
+@{
+    ViewData["Title"] = "Detalles de la Playlist";
+    Layout = "_LayoutDash"; 
+}
+
+<h2>@Model.Nombre</h2>
+
+<p>Fecha de Creación: @Model.FechaCreacion?.ToString("dd/MM/yyyy")</p>
+
+<div class="row">
+    <div class="col-md-8">
+        <h3>Canciones</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Artista</th>
+                    <th>Álbum</th>
+                    <th>Duración</th>
+                    <th>Fecha Agregada</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cancion in Model.Cancions)
+                {
+                    <tr>
+                        <td>@cancion.Titulo</td>
+                        <td>@cancion.Artista</td>
+                        <td>@cancion.Album</td>
+                        <td>@cancion.Duracion</td>
+                        <td>@cancion.FechaAgregada?.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            <form asp-action="DeleteCancion" method="post" asp-controller="ListasDeReproduccion">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@cancion.CancionId" />
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <form asp-action="CreateCancion" method="post" asp-controller="ListasDeReproduccion">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="listaId" value="@Model.ListaId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="titulo" class="control-label">Título</label>
+                <input name="titulo" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="artista" class="control-label">Artista</label>
+                <input name="artista" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="album" class="control-label">Álbum</label>
+                <input name="album" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="duracion" class="control-label">Duración</label>
+                <input type="time" name="duracion" class="form-control" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Agregar Canción</button>
+            </div>
+            <div>
+                <a asp-action="Dash" class="btn btn-secondary">Regresar a la lista</a>
+            </div>
+        </form>
+    </div>
+</div>

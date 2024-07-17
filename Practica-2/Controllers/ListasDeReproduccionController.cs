@@ -59,9 +59,9 @@ namespace Practica_2.Controllers
 
                 return RedirectToAction(nameof(Dash));
             }
-            
+
             return View(listasDeReproduccion);
-            
+
         }
 
         [HttpGet]
@@ -143,14 +143,88 @@ namespace Practica_2.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var listaDeReproduccion = await _context.ListasDeReproduccions.FindAsync(id);
+
+            if (listaDeReproduccion == null)
+            {
+                return NotFound();
+            }
+
+            var canciones = _context.Cancions.Where(c => c.ListaId == id).ToList();
+
+            if (canciones.Any())
+            {
+                _context.Cancions.RemoveRange(canciones);
+            }
+
             _context.ListasDeReproduccions.Remove(listaDeReproduccion);
+
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Dash));
         }
 
         private bool ListasDeReproduccionExists(int id)
         {
             return _context.ListasDeReproduccions.Any(e => e.ListaId == id);
+        }
+
+
+        public async Task<IActionResult> View(int id)
+        {
+            var listaDeReproduccion = await _context.ListasDeReproduccions
+                .Include(l => l.Cancions)
+                .FirstOrDefaultAsync(m => m.ListaId == id);
+
+            if (listaDeReproduccion == null)
+            {
+                return NotFound();
+            }
+
+            return View(listaDeReproduccion); 
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var listaDeReproduccion = await _context.ListasDeReproduccions
+                .Include(l => l.Cancions)
+                .FirstOrDefaultAsync(m => m.ListaId == id);
+
+            if (listaDeReproduccion == null)
+            {
+                return NotFound();
+            }
+
+            return View(listaDeReproduccion);
+        }
+
+        [HttpPost]
+        [Route("ListasDeReproduccion/CreateCancion")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateCancion(Cancion cancion)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(cancion);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("View", "ListasDeReproduccion", new { id = cancion.ListaId });
+            }
+            return View(cancion);
+        }
+
+        [HttpPost]
+        [Route("ListasDeReproduccion/DeleteCancion")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteCancion(int id)
+        {
+            var cancion = await _context.Cancions.FindAsync(id);
+            if (cancion != null)
+            {
+                var listaId = cancion.ListaId;
+                _context.Cancions.Remove(cancion);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("View", "ListasDeReproduccion", new { id = listaId });
+            }
+            return NotFound();
         }
     }
 }

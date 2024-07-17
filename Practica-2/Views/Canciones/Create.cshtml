@@ -2,7 +2,7 @@
 
 @{
     Layout = "_LayoutDash";
-    ViewData["Title"] = "Inicio";
+    ViewData["Title"] = "Agregar Cancion";
 }
 
 <div class="dashboard-container">
@@ -27,8 +27,8 @@
                     <td>@lista.Nombre</td>
                     <td>@lista.FechaCreacion</td>
                     <td>
-                        <a asp-controller="ListasDeReproduccion" asp-action="View" asp-route-id="@lista.ListaId">Ver</a> |
-                        <a asp-controller="ListasDeReproduccion" asp-action="Edit" asp-route-id="@lista.ListaId">Editar</a> |
+                        <a asp-action="View" asp-route-id="@lista.ListaId">Ver</a> |
+                        <a asp-controller="ListasDeReproduccion"  asp-action="Edit" asp-route-id="@lista.ListaId">Editar</a> |
                         <a asp-controller="ListasDeReproduccion" asp-action="Delete" asp-route-id="@lista.ListaId">Eliminar</a>
                     </td>
                 </tr>
